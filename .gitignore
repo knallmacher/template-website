@@ -1,0 +1,8 @@
+/.tmp/
+/.idea/
+*.iml
+/node_modules/
+/.astro/
+/dist/
+/.impeccable/
+/.wrangler/
