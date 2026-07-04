@@ -54,6 +54,8 @@ Impeccable covers design quality. These are the implementation practices it does
 | `docs/` | Project documentation such as design decisions, technical specifications and implementation plans. Keep documentation about how or why the website works here, not runtime content or source code. |
 | `public/` | Static files served directly by the website, such as favicons, production logos and optimized photos. Copy only assets needed at runtime from `brand/` into this folder. |
 | `src/` | The Astro website implementation, including pages, layouts, components, styles, content configuration and server-side application code. |
+| `src/styles/global.css` | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) — override them per project to match the site's brand. |
+| `dist/` | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) — at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
 
 ## Impeccable
 
