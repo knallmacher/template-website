@@ -1,6 +1,6 @@
-# template-website
+# knallmacher Website Development Kit
 
-Astro starter template [knallmacher](https://knallmacher.de) uses to build client websites: pre-wired with TypeScript, Tailwind, shadcn/ui, German legal-document scaffolding, automated design and accessibility QA.
+Astro starter template [knallmacher](https://knallmacher.de) uses to build client websites with AI coding agents and [Impeccable](https://impeccable.style): pre-wired with TypeScript, Tailwind, shadcn/ui, German legal-document scaffolding, and an automated design-quality gate on every change an agent makes.
 
 ## Table of Contents
 
@@ -16,10 +16,11 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 
 ## Features
 
+- **Impeccable design gate**: reviews every file an AI agent writes for design defects (spacing, type hierarchy, contrast) the moment it's written, not at the end of a session
+- **Multi-agent wiring**: hooks and skills preconfigured for Claude Code (`.claude/`) and Codex (`.codex/`), plus a harness-agnostic skill copy (`.agents/`), so the same design gate applies regardless of which agent is doing the building
 - **Astro + React**: static-first site generation with React islands (`@astrojs/react`) for interactive components
 - **Tailwind + shadcn/ui**: utility CSS and theme tokens in `src/styles/global.css`, ready to rebrand per client
-- **Impeccable design review**: automated frontend design QA wired in as an agent skill, run on demand or via a scheduled update workflow
-- **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast
+- **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast — the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
 - **German legal document templates**: Impressum and Datenschutzerklärung as an Astro content collection, ready to fill in per client
 - **Template sync workflow**: propagates shared updates (legal text, tooling, config) from this repo into site repos created from it
 
@@ -59,16 +60,13 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 ## How it Works
 
-**Impeccable.** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs. It runs two ways here:
-
-- On demand, as an agent skill (`.agents/skills/impeccable/`, `.claude/skills/impeccable/`) — a design-focused review pass alongside the coding agent's normal edits.
-- As a hook that scans files immediately after they're written, surfacing findings inline during development.
+**Impeccable:** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs.
 
 `.github/workflows/update-impeccable.yml` checks monthly for a newer version of Impeccable's skill files and opens a PR if one exists.
 
-**Legal documents.** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible — the same files can be diffed and pulled into every site repo without touching site-specific code.
+**Legal documents:** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible — the same files can be diffed and pulled into every site repo without touching site-specific code.
 
-**Template sync.** Because a "Use this template" copy has no ongoing link back to this repo, `.github/workflows/update-template.yml` re-establishes one on a schedule, pulling an explicit allow-list of paths back from here. Details in [Updating Site Repos from This Template](#updating-site-repos-from-this-template).
+**Template sync:** Because a "Use this template" copy has no ongoing link back to this repo, `.github/workflows/update-template.yml` re-establishes one on a schedule, pulling an explicit allow-list of paths back from here. Details in [Updating Site Repos from This Template](#updating-site-repos-from-this-template).
 
 ## Installation & Development
 
