@@ -20,7 +20,7 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 - **Multi-agent wiring**: hooks and skills preconfigured for Claude Code (`.claude/`) and Codex (`.codex/`), plus a harness-agnostic skill copy (`.agents/`), so the same design gate applies regardless of which agent is doing the building
 - **Astro + React**: static-first site generation with React islands (`@astrojs/react`) for interactive components
 - **Tailwind + shadcn/ui**: utility CSS and theme tokens in `src/styles/global.css`, ready to rebrand per client
-- **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast — the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
+- **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast - the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
 - **German legal document templates**: Impressum and Datenschutzerklärung as an Astro content collection, ready to fill in per client
 - **Template sync workflow**: propagates shared updates (legal text, tooling, config) from this repo into site repos created from it
 
@@ -34,7 +34,7 @@ On GitHub, click "Use this template" on this repo, or:
 gh repo create <client>-website --template knallmacher/template-website --private
 ```
 
-This copies the file tree once — the new repo has no ongoing git relationship to this one (see [Updating Site Repos from This Template](#updating-site-repos-from-this-template) for how updates still reach it).
+This copies the file tree once - the new repo has no ongoing git relationship to this one (see [Updating Site Repos from This Template](#updating-site-repos-from-this-template) for how updates still reach it).
 
 ### 2. Install Dependencies
 
@@ -48,7 +48,7 @@ Replace the placeholder theme tokens in `src/styles/global.css` (the Nova preset
 
 ### 4. Fill in the Legal Pages
 
-`src/content/legal/impressum.md` and `datenschutz.md` ship with bracketed placeholders (`[Unternehmensname]`, `[Anschrift]`, and so on). Replace every bracket with the client's real details before launch — see [Design & Content Best Practices](#design--content-best-practices).
+`src/content/legal/impressum.md` and `datenschutz.md` ship with bracketed placeholders (`[Unternehmensname]`, `[Anschrift]`, and so on). Replace every bracket with the client's real details before launch - see [Design & Content Best Practices](#design--content-best-practices).
 
 ### 5. Run Locally
 
@@ -64,7 +64,7 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 `.github/workflows/update-impeccable.yml` checks monthly for a newer version of Impeccable's skill files and opens a PR if one exists.
 
-**Legal documents:** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible — the same files can be diffed and pulled into every site repo without touching site-specific code.
+**Legal documents:** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible - the same files can be diffed and pulled into every site repo without touching site-specific code.
 
 **Template sync:** Because a "Use this template" copy has no ongoing link back to this repo, `.github/workflows/update-template.yml` re-establishes one on a schedule, pulling an explicit allow-list of paths back from here. Details in [Updating Site Repos from This Template](#updating-site-repos-from-this-template).
 
@@ -85,7 +85,7 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 3. **Configure the Brand**
 
-   Override the theme tokens in `src/styles/global.css` and place client-specific assets in `brand/` and `public/`. There are no environment variables — this is a purely static site.
+   Override the theme tokens in `src/styles/global.css` and place client-specific assets in `brand/` and `public/`. There are no environment variables - this is a purely static site.
 
 4. **Run Locally**
 
@@ -103,7 +103,7 @@ npm run qa
 
 The gate covers console/page errors, WCAG 2.x A/AA accessibility violations, horizontal overflow at narrow viewports, and colour contrast.
 
-Every script takes `[BASE_URL] [ROUTES]` as its first two arguments — `BASE_URL` defaults to `http://localhost:4321`, `ROUTES` is a comma-separated list of paths defaulting to `/`:
+Every script takes `[BASE_URL] [ROUTES]` as its first two arguments - `BASE_URL` defaults to `http://localhost:4321`, `ROUTES` is a comma-separated list of paths defaulting to `/`:
 
 ```
 node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
@@ -117,7 +117,7 @@ node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
 | `narrow.mjs` | `node tools/qa/narrow.mjs [BASE_URL] [ROUTES] [OUT_DIR] [WIDTHS]` | Detects horizontal overflow at narrow widths. Defaults to 320 and 360 pixels and exits with code 1 on failure. |
 | `contrast.mjs` | `node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs` | Checks the project-specific colour pairs in `contrast-pairs.mjs`. |
 | `contrast.mjs` | `node tools/qa/contrast.mjs <fg> <bg> [large]` | Checks one colour pair against WCAG 2.2 AA. |
-| `shot.mjs` | `node tools/qa/shot.mjs [BASE_URL] [ROUTES] [OUT_DIR]` | Captures desktop, tablet and mobile screenshots, page sections, the scrolled navigation and the open mobile menu. Not part of the gate — for visual review. |
+| `shot.mjs` | `node tools/qa/shot.mjs [BASE_URL] [ROUTES] [OUT_DIR]` | Captures desktop, tablet and mobile screenshots, page sections, the scrolled navigation and the open mobile menu. Not part of the gate - for visual review. |
 
 Shared Playwright helpers (viewports, launch/teardown, animation settling) live in `tools/qa/lib/browser.mjs`. The contrast helpers can also be imported directly:
 
@@ -127,11 +127,11 @@ import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 
 ## Design & Content Best Practices
 
-Impeccable covers design quality. These are the implementation practices it does not enforce — easy to overlook during development and expensive to retrofit before launch.
+Impeccable covers design quality. These are the implementation practices it does not enforce - easy to overlook during development and expensive to retrofit before launch.
 
 ### Icons
 
-- Use [Iconify](https://iconify.design/) and commit to one icon set per project (e.g. Lucide, Tabler or Phosphor). Mixing sets produces subtly inconsistent stroke widths and corner radii. In Astro, `astro-icon` with the matching `@iconify-json/*` package renders inline SVG at build time — no icon font, no runtime request.
+- Use [Iconify](https://iconify.design/) and commit to one icon set per project (e.g. Lucide, Tabler or Phosphor). Mixing sets produces subtly inconsistent stroke widths and corner radii. In Astro, `astro-icon` with the matching `@iconify-json/*` package renders inline SVG at build time - no icon font, no runtime request.
 - Never use emoji as UI icons. They render differently on every platform and ignore the colour system.
 
 ### Fonts
@@ -142,19 +142,19 @@ Impeccable covers design quality. These are the implementation practices it does
 ### Favicon
 
 - Generate the full set from the production logo: `favicon.svg` (can adapt to dark mode via `prefers-color-scheme`), `favicon.ico` as fallback, `apple-touch-icon.png` (180 px) and a web manifest with 192/512 px icons plus `theme-color`.
-- Check the favicon at 16 px in a real browser tab. Most logos need a simplified mark at that size — a scaled-down wordmark turns into noise.
+- Check the favicon at 16 px in a real browser tab. Most logos need a simplified mark at that size - a scaled-down wordmark turns into noise.
 
 ### SEO
 
 - Every page gets a unique `<title>` (~50–60 characters) and meta description (~150 characters), written for the searcher, not for the company. Front-load the term people actually search for.
 - One `h1` per page; headings follow the document outline, not the visual size you want (style the size in CSS instead).
-- Add Open Graph and Twitter card tags with a real 1200×630 preview image — company sites get shared in chats more often than they get googled.
+- Add Open Graph and Twitter card tags with a real 1200×630 preview image - company sites get shared in chats more often than they get googled.
 - Generate `sitemap.xml` (`@astrojs/sitemap`) and `robots.txt`, set canonical URLs, and add JSON-LD `LocalBusiness`/`Organization` structured data with name, address and opening hours.
 - Write copy so the first viewport answers what the company does, for whom, and where. Search engines and visitors give up at the same speed.
 
 ### Images
 
-- Never serve files from `brand/` directly — those are masters. Import photos through Astro's `<Image>`/`<Picture>` components so they get resized and converted to AVIF/WebP at build time; only hand-optimized assets go into `public/`.
+- Never serve files from `brand/` directly - those are masters. Import photos through Astro's `<Image>`/`<Picture>` components so they get resized and converted to AVIF/WebP at build time; only hand-optimized assets go into `public/`.
 - Every image needs explicit `width` and `height` (prevents layout shift) and `loading="lazy"` below the fold. The hero image is the exception: not lazy, `fetchpriority="high"`.
 - Budget as a sanity check: hero ≤ 200 KB, everything else ≤ 100 KB. `ls -S dist/_astro/*.{avif,webp,jpg,png}` after a build shows the offenders immediately.
 
@@ -172,17 +172,17 @@ Run through [docs/launch-checklist.md](docs/launch-checklist.md) before any site
 | `public/` | Static files served directly by the website, such as favicons, production logos and optimized photos. Copy only assets needed at runtime from `brand/` into this folder. |
 | `src/` | The Astro website implementation, including pages, layouts, components, styles, content configuration and server-side application code. |
 | `src/content/legal/` | Impressum and Datenschutzerklärung content, as an Astro content collection (see [How it Works](#how-it-works)). |
-| `src/styles/global.css` | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) — override them per project to match the site's brand. |
+| `src/styles/global.css` | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) - override them per project to match the site's brand. |
 | `tools/qa/` | Playwright/axe-core visual QA scripts (see [Testing](#testing)). |
-| `dist/` | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) — at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
+| `dist/` | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) - at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
 
 ## Updating Site Repos from This Template
 
-Site repos are created from this one via GitHub's "Use this template", which copies the file tree once with no ongoing git relationship. `.github/workflows/update-template.yml` — itself copied into every new site repo — closes that gap: on a monthly schedule (or via `workflow_dispatch`), it pulls the paths listed in `.github/template-sync-paths.txt` from this repo and opens a PR in the site repo, the same two-job pattern (`prepare-update` builds a patch, `open-pull-request` applies it) as `update-impeccable.yml`. It no-ops when run inside this template repo itself.
+Site repos are created from this one via GitHub's "Use this template", which copies the file tree once with no ongoing git relationship. `.github/workflows/update-template.yml` - itself copied into every new site repo - closes that gap: on a monthly schedule (or via `workflow_dispatch`), it pulls the paths listed in `.github/template-sync-paths.txt` from this repo and opens a PR in the site repo, the same two-job pattern (`prepare-update` builds a patch, `open-pull-request` applies it) as `update-impeccable.yml`. It no-ops when run inside this template repo itself.
 
-This repo is public specifically so that checkout works anonymously — no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
+This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`) and shared tooling (`tools/qa/`, `tsconfig.json`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way — anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`) and shared tooling (`tools/qa/`, `tsconfig.json`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 
