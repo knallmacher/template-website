@@ -6,6 +6,7 @@
 - [Project structure](#project-structure)
 - [Impeccable](#impeccable)
 - [Visual QA](#visual-qa)
+- [Updating site repos from this template](#updating-site-repos-from-this-template)
 
 ## Best practices
 
@@ -97,3 +98,11 @@ The contrast helpers can also be imported:
 ```js
 import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 ```
+
+## Updating site repos from this template
+
+Site repos are created from this one via GitHub's "Use this template", which copies the file tree once with no ongoing git relationship. `.github/workflows/update-template.yml` — itself copied into every new site repo — closes that gap: on a monthly schedule (or via `workflow_dispatch`), it pulls the paths listed in `.github/template-sync-paths.txt` from this repo and opens a PR in the site repo, the same two-job pattern (`prepare-update` builds a patch, `open-pull-request` applies it) as `update-impeccable.yml`.
+
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`) and shared tooling (`tools/qa/`, `tsconfig.json`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way — anything not listed is treated as site-specific and left alone.
+
+Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.

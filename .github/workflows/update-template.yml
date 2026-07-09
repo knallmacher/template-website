@@ -1,0 +1,114 @@
+name: Update Template
+
+# Pulls the allow-listed paths below from the knallmacher/template-website
+# repo and opens a PR with whatever changed. Site repos are created via
+# GitHub's "Use this template" and have no ongoing git relationship to the
+# template afterwards — this workflow is how updates (legal document text,
+# shared tooling/config) get carried forward once a site repo diverges.
+
+on:
+  schedule:
+    - cron: "0 6 15 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-update:
+    if: github.repository != 'knallmacher/template-website'
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.patch.outputs.has_changes }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Fetch template repository
+        run: git clone --depth 1 https://github.com/knallmacher/template-website.git /tmp/template
+
+      - name: Sync allow-listed paths from template
+        shell: bash
+        run: |
+          mapfile -t sync_paths < <(grep -v '^#' .github/template-sync-paths.txt | grep -v '^\s*$')
+
+          for path in "${sync_paths[@]}"; do
+            src="/tmp/template/$path"
+            if [[ ! -e "$src" ]]; then
+              continue
+            fi
+            rm -rf -- "$path"
+            mkdir -p -- "$(dirname "$path")"
+            cp -R -- "$src" "$path"
+          done
+
+      - name: Create constrained update patch
+        id: patch
+        shell: bash
+        run: |
+          mapfile -t sync_paths < <(grep -v '^#' .github/template-sync-paths.txt | grep -v '^\s*$')
+
+          existing_paths=()
+          for path in "${sync_paths[@]}"; do
+            if [[ -e "$path" ]]; then
+              existing_paths+=("$path")
+            fi
+          done
+
+          if [[ ${#existing_paths[@]} -gt 0 ]]; then
+            git add -A -- "${existing_paths[@]}"
+          fi
+
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --cached --binary > /tmp/template.patch
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload update patch
+        if: steps.patch.outputs.has_changes == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: template-update
+          path: /tmp/template.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  open-pull-request:
+    needs: prepare-update
+    if: needs.prepare-update.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Download update patch
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: template-update
+          path: /tmp/template-update
+
+      - name: Apply update patch
+        run: git apply --index /tmp/template-update/template.patch
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          branch: deps/update-template
+          delete-branch: true
+          commit-message: "deps: update template"
+          title: "deps: update template"
+          body: |
+            Automated update pulling the paths listed in `.github/template-sync-paths.txt` from [knallmacher/template-website](https://github.com/knallmacher/template-website).
+
+            Review the diff carefully before merging — this includes legal document text (Impressum/Datenschutzerklärung).
