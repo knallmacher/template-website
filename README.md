@@ -162,9 +162,7 @@ Impeccable covers design quality. These are the implementation practices it does
 
 ### Before Launch
 
-- Run the QA gate across all routes: `node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz` (see [Testing](#testing)).
-- Verify the pages every German business site legally needs exist and are linked from the footer: Impressum and Datenschutzerklärung, with every bracketed placeholder replaced.
-- Have the filled-in legal text reviewed by qualified counsel — this template's Impressum/Datenschutzerklärung are a structural starting point, not a substitute for legal sign-off, and facts like which processors are used or whether cookies requiring consent are present differ per site.
+Run through [docs/launch-checklist.md](docs/launch-checklist.md) before any site built from this template goes live.
 
 ## Project Structure
 
