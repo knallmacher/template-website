@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="mx-auto max-w-2xl px-6 py-16 text-foreground">
+    <h1 class="mb-8 text-3xl font-semibold">{title}</h1>
+    <div class="legal-content space-y-4 leading-relaxed">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style>
+  .legal-content :global(h2) {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border, #e5e5e5);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .legal-content :global(h2:first-child) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .legal-content :global(h3) {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .legal-content :global(h4) {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .legal-content :global(ul) {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+</style>
