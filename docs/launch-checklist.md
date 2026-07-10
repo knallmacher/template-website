@@ -28,6 +28,7 @@ Run through this before any site built from this template goes live. Each item l
 
 ## QA gate
 
+- [ ] `npm run launch:check` passes for the configured client site
 - [ ] `npm run qa` passes against every route, including `/impressum` and `/datenschutz`:
   ```
   node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz

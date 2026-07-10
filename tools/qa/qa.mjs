@@ -8,7 +8,7 @@
  *
  * Defaults:
  *   BASE_URL  http://localhost:4321
- *   ROUTES    /
+ *   ROUTES    /impressum,/datenschutz
  *
  * Runs, in order:
  *   check-console.mjs   console errors and failed requests
@@ -28,7 +28,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const BASE = process.argv[2] || 'http://localhost:4321';
-const ROUTES = process.argv[3] || '/';
+const ROUTES = process.argv[3] || '/impressum,/datenschutz';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const pairsFile = path.join(dir, 'contrast-pairs.mjs');

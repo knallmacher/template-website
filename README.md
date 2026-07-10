@@ -99,15 +99,36 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 ## Testing
 
-This project uses `Playwright` and `axe-core` for QA, driven through the scripts in `tools/qa/`. Run the full gate against a running dev server:
+The pull-request gate is intentionally limited to static validation and the production build. Run it locally with:
 
 ```
+npm run verify
+```
+
+`npm run verify` runs formatting, Astro and TypeScript validation, the rendered-content dash check and `astro build`. GitHub Actions runs the same command for every pull request. It does not run on direct pushes and does not start a browser.
+
+Browser QA is local-only. Start the dev server in one terminal, then run the checks in another:
+
+```
+npm run dev
 npm run qa
 ```
 
-The gate covers console/page errors, WCAG 2.x A/AA accessibility violations, horizontal overflow at narrow viewports, and colour contrast.
+The browser gate covers console/page errors, WCAG 2.x A/AA accessibility violations, horizontal overflow at narrow viewports and colour contrast. Screenshots remain optional:
 
-Every script takes `[BASE_URL] [ROUTES]` as its first two arguments - `BASE_URL` defaults to `http://localhost:4321`, `ROUTES` is a comma-separated list of paths defaulting to `/`:
+```
+npm run shot
+```
+
+Before deployment, run the client-specific readiness check:
+
+```
+npm run launch:check
+```
+
+This reports deliberate template defaults such as legal placeholders, `example.com`, missing favicon assets and a missing Open Graph image. It is expected to fail in the unconfigured template.
+
+Every browser script takes `[BASE_URL] [ROUTES]` as its first two arguments. `BASE_URL` defaults to `http://localhost:4321`. `ROUTES` defaults to `/impressum,/datenschutz` and accepts a comma-separated list of paths:
 
 ```
 node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
@@ -129,7 +150,7 @@ Shared Playwright helpers (viewports, launch/teardown, animation settling) live 
 import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 ```
 
-Formatting is separate from the QA gate: `npm run format` (Prettier, with `prettier-plugin-astro` and `prettier-plugin-tailwindcss`) and `npm run format:check` are available but not wired into any CI check - run them as needed.
+The individual static commands remain available when diagnosing a failure: `npm run format:check`, `npm run astro:check` and `npm run check:dashes`. `npm run format` applies Prettier formatting.
 
 `npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md` or `docs/`, and never touches the vendored `.agents/`/`.claude/` Impeccable skill files.
 
@@ -152,6 +173,7 @@ Documentations and design and best practices are in `docs/`. The most important 
 | `src/content/legal/`       | Impressum and Datenschutzerklärung content, as an Astro content collection (see [How it Works](#how-it-works)).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `src/components/Seo.astro` | Meta tags, Open Graph/Twitter cards and `LocalBusiness` JSON-LD (see [How it Works](#how-it-works)).                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `src/styles/global.css`    | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) - override them per project to match the site's brand.                                                                                                                                                                                                                                                                                                                                                                     |
+| `tools/check/`             | Static verification and client launch-readiness checks.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `tools/qa/`                | Playwright/axe-core visual QA scripts (see [Testing](#testing)).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `dist/`                    | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) - at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
 
@@ -161,7 +183,7 @@ Site repos are created from this one via GitHub's "Use this template", which cop
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`, `docs/launch-checklist.md`, `docs/best-practices.md`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`, `docs/launch-checklist.md`, `docs/best-practices.md`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 
