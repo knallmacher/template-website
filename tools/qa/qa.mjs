@@ -27,19 +27,22 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const BASE   = process.argv[2] || 'http://localhost:4321';
+const BASE = process.argv[2] || 'http://localhost:4321';
 const ROUTES = process.argv[3] || '/';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const pairsFile = path.join(dir, 'contrast-pairs.mjs');
 
 const checks = [
-  ['console',  [path.join(dir, 'check-console.mjs'), BASE, ROUTES]],
-  ['a11y',     [path.join(dir, 'a11y.mjs'), BASE, ROUTES]],
+  ['console', [path.join(dir, 'check-console.mjs'), BASE, ROUTES]],
+  ['a11y', [path.join(dir, 'a11y.mjs'), BASE, ROUTES]],
   ['overflow', [path.join(dir, 'narrow.mjs'), BASE, ROUTES]],
 ];
 if (existsSync(pairsFile)) {
-  checks.push(['contrast', [path.join(dir, 'contrast.mjs'), '--file', pairsFile]]);
+  checks.push([
+    'contrast',
+    [path.join(dir, 'contrast.mjs'), '--file', pairsFile],
+  ]);
 }
 
 const summary = [];

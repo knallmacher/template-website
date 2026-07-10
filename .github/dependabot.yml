@@ -1,30 +1,30 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "quarterly"
+      interval: 'quarterly'
     open-pull-requests-limit: 3
     assignees:
-      - "jasonhaak"
+      - 'jasonhaak'
     commit-message:
-      prefix: "deps"
-    versioning-strategy: "increase-if-necessary"
+      prefix: 'deps'
+    versioning-strategy: 'increase-if-necessary'
     groups:
       node-tooling:
         patterns:
-          - "*"
+          - '*'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     open-pull-requests-limit: 2
     assignees:
-      - "jasonhaak"
+      - 'jasonhaak'
     commit-message:
-      prefix: "ci"
+      prefix: 'ci'
     groups:
       actions:
         patterns:
-          - "*"
+          - '*'

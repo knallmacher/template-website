@@ -23,8 +23,12 @@
 
 function toRgb(hex) {
   hex = hex.replace('#', '');
-  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
-  return [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
+  if (hex.length === 3)
+    hex = hex
+      .split('')
+      .map((c) => c + c)
+      .join('');
+  return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
 }
 
 function linearize(c) {
@@ -46,7 +50,7 @@ export function ratio(fg, bg) {
 }
 
 export function check(fg, bg, large = false) {
-  const r   = ratio(fg, bg);
+  const r = ratio(fg, bg);
   const min = large ? 3 : 4.5;
   return { ratio: r, pass: r >= min, min };
 }
@@ -56,7 +60,9 @@ export function checkPairs(pairs) {
   for (const [label, fg, bg, large = false] of pairs) {
     const { ratio: r, pass, min } = check(fg, bg, large);
     if (!pass) fails++;
-    console.log(`${pass ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (need ${min})  ${label}  ${fg} on ${bg}`);
+    console.log(
+      `${pass ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (need ${min})  ${label}  ${fg} on ${bg}`,
+    );
   }
   const total = pairs.length;
   console.log(`\n${fails === 0 ? 'All pass' : `${fails}/${total} failed`}`);
@@ -71,30 +77,35 @@ if (process.argv[1] === new URL(import.meta.url).pathname) {
   if (args[0] === '--file') {
     // Load a pairs file and run checkPairs against it.
     const file = args[1];
-    if (!file) { console.error('Usage: --file <path-to-pairs-file.mjs>'); process.exit(1); }
+    if (!file) {
+      console.error('Usage: --file <path-to-pairs-file.mjs>');
+      process.exit(1);
+    }
     const mod = await import(new URL(file, `file://${process.cwd()}/`).href);
     const pairs = mod.default;
     const { fails } = checkPairs(pairs);
     process.exit(fails > 0 ? 1 : 0);
-
   } else if (args[0]) {
     // Single pair from CLI: fg bg [large]
     const [fg, bg, sizeFlag] = args;
     const large = sizeFlag === 'large';
     const { ratio: r, pass, min } = check(fg, bg, large);
-    console.log(`${pass ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (need ${min})  ${fg} on ${bg}`);
+    console.log(
+      `${pass ? 'PASS' : 'FAIL'}  ${r.toFixed(2)}:1  (need ${min})  ${fg} on ${bg}`,
+    );
     process.exit(pass ? 0 : 1);
-
   } else {
-    console.log([
-      'Usage:',
-      '  node tools/qa/contrast.mjs <fg> <bg> [large]',
-      '  node tools/qa/contrast.mjs --file <pairs-file.mjs>',
-      '',
-      'Examples:',
-      "  node tools/qa/contrast.mjs '#636363' '#ffffff'",
-      "  node tools/qa/contrast.mjs '#f74932' '#191919' large",
-      '  node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs',
-    ].join('\n'));
+    console.log(
+      [
+        'Usage:',
+        '  node tools/qa/contrast.mjs <fg> <bg> [large]',
+        '  node tools/qa/contrast.mjs --file <pairs-file.mjs>',
+        '',
+        'Examples:',
+        "  node tools/qa/contrast.mjs '#636363' '#ffffff'",
+        "  node tools/qa/contrast.mjs '#f74932' '#191919' large",
+        '  node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs',
+      ].join('\n'),
+    );
   }
 }

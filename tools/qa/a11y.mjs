@@ -16,27 +16,36 @@
  */
 
 import axe from 'axe-core';
-import { DEFAULT_BASE, VIEWPORTS, parseRoutes, withBrowser, withPage, settle } from './lib/browser.mjs';
+import {
+  DEFAULT_BASE,
+  VIEWPORTS,
+  parseRoutes,
+  withBrowser,
+  withPage,
+  settle,
+} from './lib/browser.mjs';
 
-const BASE   = process.argv[2] || DEFAULT_BASE;
+const BASE = process.argv[2] || DEFAULT_BASE;
 const routes = parseRoutes(process.argv[3]);
 
-const results = await withBrowser(browser =>
-  Promise.all(routes.map(route =>
-    withPage(browser, VIEWPORTS.desktop, async page => {
-      console.log(`Checking ${BASE}${route} ...`);
-      await page.goto(BASE + route, { waitUntil: 'domcontentloaded' });
-      await settle(page);
-      await page.addScriptTag({ content: axe.source });
-      const { violations } = await page.evaluate(() =>
-        window.axe.run(document, {
-          runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'],
-          resultTypes: ['violations'],
-        })
-      );
-      return { route, violations };
-    })
-  ))
+const results = await withBrowser((browser) =>
+  Promise.all(
+    routes.map((route) =>
+      withPage(browser, VIEWPORTS.desktop, async (page) => {
+        console.log(`Checking ${BASE}${route} ...`);
+        await page.goto(BASE + route, { waitUntil: 'domcontentloaded' });
+        await settle(page);
+        await page.addScriptTag({ content: axe.source });
+        const { violations } = await page.evaluate(() =>
+          window.axe.run(document, {
+            runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'],
+            resultTypes: ['violations'],
+          }),
+        );
+        return { route, violations };
+      }),
+    ),
+  ),
 );
 
 let total = 0;
@@ -53,5 +62,7 @@ for (const { route, violations } of results) {
 }
 
 const ok = total === 0;
-console.log(`\n${ok ? 'OK' : 'FAIL'}  ${total} violation(s) across ${routes.length} route(s)`);
+console.log(
+  `\n${ok ? 'OK' : 'FAIL'}  ${total} violation(s) across ${routes.length} route(s)`,
+);
 process.exitCode = ok ? 0 : 1;

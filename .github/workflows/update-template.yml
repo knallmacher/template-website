@@ -8,7 +8,7 @@ name: Update Template
 
 on:
   schedule:
-    - cron: "0 6 15 * *"
+    - cron: '0 6 15 * *'
   workflow_dispatch:
 
 permissions:
@@ -110,8 +110,8 @@ jobs:
         with:
           branch: deps/update-template
           delete-branch: true
-          commit-message: "deps: update template"
-          title: "deps: update template"
+          commit-message: 'deps: update template'
+          title: 'deps: update template'
           body: |
             Automated update pulling the paths listed in `.github/template-sync-paths.txt` from [knallmacher/template-website](https://github.com/knallmacher/template-website).
 
