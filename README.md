@@ -22,6 +22,8 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 - **Tailwind + shadcn/ui**: utility CSS and theme tokens in `src/styles/global.css`, ready to rebrand per client
 - **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast - the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
 - **German legal document templates**: Impressum and Datenschutzerklärung as an Astro content collection, ready to fill in per client
+- **SEO component**: `src/components/Seo.astro` handles meta tags, Open Graph/Twitter cards and `LocalBusiness` JSON-LD, plus `@astrojs/sitemap` and a starter `robots.txt` - drop it into any page's `<head>` without inheriting layout decisions
+- **Prettier formatting**: `prettier-plugin-astro` and `prettier-plugin-tailwindcss` keep formatting and Tailwind class order identical regardless of which agent or session wrote the code
 - **Template sync workflow**: propagates shared updates (legal text, tooling, config) from this repo into site repos created from it
 
 ## Quick Start
@@ -68,6 +70,8 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 **Template sync:** Because a "Use this template" copy has no ongoing link back to this repo, `.github/workflows/update-template.yml` re-establishes one on a schedule, pulling an explicit allow-list of paths back from here. Details in [Updating Site Repos from This Template](#updating-site-repos-from-this-template).
 
+**SEO:** `src/components/Seo.astro` takes `title`/`description` as required props and canonical URL, OG image, and `LocalBusiness` fields (name, address, phone, opening hours) as optional ones - the JSON-LD block only renders if business name and address are both provided. `astro.config.mjs` sets a placeholder `site` URL that both the sitemap integration and the component's canonical/OG URLs depend on; replace it with the real production URL per site. `astro.config.mjs` and `public/robots.txt` are deliberately not in the template-sync allow-list, since sitemap integrations and crawl rules are exactly what a site is expected to customize afterward.
+
 ## Installation & Development
 
 1. **Clone the Repository**
@@ -109,15 +113,15 @@ Every script takes `[BASE_URL] [ROUTES]` as its first two arguments - `BASE_URL`
 node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
 ```
 
-| Script | Command | Purpose |
-| --- | --- | --- |
-| `qa.mjs` | `node tools/qa/qa.mjs [BASE_URL] [ROUTES]` | Single QA gate: runs the console, a11y, overflow and contrast checks and exits with code 1 if any fail. |
-| `check-console.mjs` | `node tools/qa/check-console.mjs [BASE_URL] [ROUTES]` | Checks routes for console errors, page errors and failed network requests. Exits with code 1 on failure. |
-| `a11y.mjs` | `node tools/qa/a11y.mjs [BASE_URL] [ROUTES]` | Checks routes for WCAG 2.x A/AA violations with axe-core. Exits with code 1 on failure. |
-| `narrow.mjs` | `node tools/qa/narrow.mjs [BASE_URL] [ROUTES] [OUT_DIR] [WIDTHS]` | Detects horizontal overflow at narrow widths. Defaults to 320 and 360 pixels and exits with code 1 on failure. |
-| `contrast.mjs` | `node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs` | Checks the project-specific colour pairs in `contrast-pairs.mjs`. |
-| `contrast.mjs` | `node tools/qa/contrast.mjs <fg> <bg> [large]` | Checks one colour pair against WCAG 2.2 AA. |
-| `shot.mjs` | `node tools/qa/shot.mjs [BASE_URL] [ROUTES] [OUT_DIR]` | Captures desktop, tablet and mobile screenshots, page sections, the scrolled navigation and the open mobile menu. Not part of the gate - for visual review. |
+| Script              | Command                                                           | Purpose                                                                                                                                                     |
+| ------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `qa.mjs`            | `node tools/qa/qa.mjs [BASE_URL] [ROUTES]`                        | Single QA gate: runs the console, a11y, overflow and contrast checks and exits with code 1 if any fail.                                                     |
+| `check-console.mjs` | `node tools/qa/check-console.mjs [BASE_URL] [ROUTES]`             | Checks routes for console errors, page errors and failed network requests. Exits with code 1 on failure.                                                    |
+| `a11y.mjs`          | `node tools/qa/a11y.mjs [BASE_URL] [ROUTES]`                      | Checks routes for WCAG 2.x A/AA violations with axe-core. Exits with code 1 on failure.                                                                     |
+| `narrow.mjs`        | `node tools/qa/narrow.mjs [BASE_URL] [ROUTES] [OUT_DIR] [WIDTHS]` | Detects horizontal overflow at narrow widths. Defaults to 320 and 360 pixels and exits with code 1 on failure.                                              |
+| `contrast.mjs`      | `node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs`   | Checks the project-specific colour pairs in `contrast-pairs.mjs`.                                                                                           |
+| `contrast.mjs`      | `node tools/qa/contrast.mjs <fg> <bg> [large]`                    | Checks one colour pair against WCAG 2.2 AA.                                                                                                                 |
+| `shot.mjs`          | `node tools/qa/shot.mjs [BASE_URL] [ROUTES] [OUT_DIR]`            | Captures desktop, tablet and mobile screenshots, page sections, the scrolled navigation and the open mobile menu. Not part of the gate - for visual review. |
 
 Shared Playwright helpers (viewports, launch/teardown, animation settling) live in `tools/qa/lib/browser.mjs`. The contrast helpers can also be imported directly:
 
@@ -125,25 +129,31 @@ Shared Playwright helpers (viewports, launch/teardown, animation settling) live 
 import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 ```
 
+Formatting is separate from the QA gate: `npm run format` (Prettier, with `prettier-plugin-astro` and `prettier-plugin-tailwindcss`) and `npm run format:check` are available but not wired into any CI check - run them as needed.
+
+`npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md` or `docs/`, and never touches the vendored `.agents/`/`.claude/` Impeccable skill files.
+
 ## Design & Content Best Practices
 
 Documentations and design and best practices are in `docs/`. The most important ones for this template are:
+
 - [docs/best-practices.md](docs/best-practices.md): design and content best practices
 - [docs/launch-checklist.md](docs/launch-checklist.md): a checklist of the things to do before a site goes live
 
 ## Project Structure
 
-| Path | Purpose |
-| --- | --- |
-| `brand/` | Source material for the brand, including original logos, approved photos, legal texts and other assets that define the company identity. Keep master files here, including formats that are not served by the website. |
-| `design/` | Design references such as page mockups, visual explorations and approved screen designs. These files guide implementation but are not part of the deployed website. |
-| `docs/` | Project documentation such as design decisions, technical specifications and implementation plans. Keep documentation about how or why the website works here, not runtime content or source code. |
-| `public/` | Static files served directly by the website, such as favicons, production logos and optimized photos. Copy only assets needed at runtime from `brand/` into this folder. |
-| `src/` | The Astro website implementation, including pages, layouts, components, styles, content configuration and server-side application code. |
-| `src/content/legal/` | Impressum and Datenschutzerklärung content, as an Astro content collection (see [How it Works](#how-it-works)). |
-| `src/styles/global.css` | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) - override them per project to match the site's brand. |
-| `tools/qa/` | Playwright/axe-core visual QA scripts (see [Testing](#testing)). |
-| `dist/` | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) - at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
+| Path                       | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `brand/`                   | Source material for the brand, including original logos, approved photos, legal texts and other assets that define the company identity. Keep master files here, including formats that are not served by the website.                                                                                                                                                                                                                                                                                                                                |
+| `design/`                  | Design references such as page mockups, visual explorations and approved screen designs. These files guide implementation but are not part of the deployed website.                                                                                                                                                                                                                                                                                                                                                                                   |
+| `docs/`                    | Project documentation such as design decisions, technical specifications and implementation plans. Keep documentation about how or why the website works here, not runtime content or source code.                                                                                                                                                                                                                                                                                                                                                    |
+| `public/`                  | Static files served directly by the website, such as favicons, production logos and optimized photos. Copy only assets needed at runtime from `brand/` into this folder.                                                                                                                                                                                                                                                                                                                                                                              |
+| `src/`                     | The Astro website implementation, including pages, layouts, components, styles, content configuration and server-side application code.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `src/content/legal/`       | Impressum and Datenschutzerklärung content, as an Astro content collection (see [How it Works](#how-it-works)).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `src/components/Seo.astro` | Meta tags, Open Graph/Twitter cards and `LocalBusiness` JSON-LD (see [How it Works](#how-it-works)).                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `src/styles/global.css`    | Tailwind entry point and [shadcn/ui](https://ui.shadcn.com/) theme tokens. The color values are placeholders (Nova preset) - override them per project to match the site's brand.                                                                                                                                                                                                                                                                                                                                                                     |
+| `tools/qa/`                | Playwright/axe-core visual QA scripts (see [Testing](#testing)).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `dist/`                    | Build output (`npm run build`). Plain `dist` is Astro's default and correct for this purely static site. If the project later adds a server-side resource (e.g. a database, KV sessions), Astro splits the build into `dist/client` (the real static assets) and `dist/server` (its own SSR runtime, unused in this deployment) - at that point, set `outDir` to `dist/client` instead, since pointing the deploy step at plain `dist` then fails silently: no build error, just 404s on every static asset, including after a correct preview login. |
 
 ## Updating Site Repos from This Template
 
@@ -151,7 +161,7 @@ Site repos are created from this one via GitHub's "Use this template", which cop
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`) and shared tooling (`tools/qa/`, `tsconfig.json`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`, `docs/launch-checklist.md`, `docs/best-practices.md`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 

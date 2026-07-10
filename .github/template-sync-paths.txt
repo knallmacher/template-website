@@ -10,7 +10,10 @@ src/content.config.ts
 src/layouts/LegalLayout.astro
 src/pages/impressum.astro
 src/pages/datenschutz.astro
+src/components/Seo.astro
 tools/qa
 tsconfig.json
+prettier.config.mjs
+.prettierignore
 .github/workflows/update-template.yml
 .github/template-sync-paths.txt

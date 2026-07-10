@@ -156,7 +156,7 @@ Sie haben das Recht, Ihre datenschutzrechtliche Einwilligungserklärung jederzei
 
 ### 9.9. Recht gegen eine automatisierte Entscheidung im Einzelfall einschließlich Profiling gemäß Art. 22 DSGVO
 
-Sie haben das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung – einschließlich Profiling – beruhenden Entscheidung unterworfen zu werden, die Ihnen gegenüber rechtliche Wirkung entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt.
+Sie haben das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung, einschließlich Profiling, beruhenden Entscheidung unterworfen zu werden, die Ihnen gegenüber rechtliche Wirkung entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt.
 
 ### 9.10. Recht auf Beschwerde bei einer Aufsichtsbehörde gemäß Art. 77 DSGVO
 

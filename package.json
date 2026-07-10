@@ -12,10 +12,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "qa": "node tools/qa/qa.mjs",
-    "shot": "node tools/qa/shot.mjs"
+    "shot": "node tools/qa/shot.mjs",
+    "check:dashes": "node tools/qa/no-dashes.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
+    "@astrojs/sitemap": "^3.7.3",
     "@base-ui/react": "^1.6.0",
     "@fontsource-variable/geist": "^5.2.9",
     "@tailwindcss/vite": "^4.3.2",
@@ -34,6 +38,9 @@
     "@types/react-dom": "^19.2.3",
     "axe-core": "^4.12.1",
     "playwright": "^1.61.1",
+    "prettier": "^3.9.5",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "shadcn": "^4.13.0"
   }
 }
