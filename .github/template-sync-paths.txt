@@ -3,6 +3,8 @@
 # blank lines are ignored. Anything not listed here is site-specific and
 # must not be overwritten by the sync.
 docs/launch-checklist.md
+docs/best-practices.md
+.github/dependabot.yml
 src/content/legal
 src/content.config.ts
 src/layouts/LegalLayout.astro
