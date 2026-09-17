@@ -1,8 +1,3 @@
 dist/
 .astro/
 node_modules/
-
-# Vendored Impeccable skill files - only touched by update-impeccable.yml,
-# never by our own formatting.
-.agents/skills/impeccable/
-.claude/skills/impeccable/

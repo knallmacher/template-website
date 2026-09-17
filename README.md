@@ -1,6 +1,6 @@
 # knallmacher Website Development Kit
 
-Astro starter template [knallmacher](https://knallmacher.de) uses to build client websites with AI coding agents and [Impeccable](https://impeccable.style): pre-wired with TypeScript, Tailwind, shadcn/ui, German legal-document scaffolding, and an automated design-quality gate on every change an agent makes.
+Astro starter template [knallmacher](https://knallmacher.de) uses to build client websites with AI coding agents and [Impeccable](https://impeccable.style): pre-wired with TypeScript, Tailwind, shadcn/ui and German legal-document scaffolding, with design quality enforced through the Impeccable skill and an automated QA suite.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 
 ## Features
 
-- **Impeccable design gate**: reviews every file an AI agent writes for design defects (spacing, type hierarchy, contrast) the moment it's written, not at the end of a session
+- **Impeccable design gate**: the [Impeccable](https://impeccable.style) skill reviews UI code for design defects (spacing, type hierarchy, contrast) while the work is being written
 - **Multi-agent wiring**: hooks and skills preconfigured for Claude Code (`.claude/`) and Codex (`.codex/`), plus a harness-agnostic skill copy (`.agents/`), so the same design gate applies regardless of which agent is doing the building
 - **Astro + React**: static-first site generation with React islands (`@astrojs/react`) for interactive components
 - **Tailwind + shadcn/ui**: utility CSS and theme tokens in `src/styles/global.css`, ready to rebrand per client
@@ -61,9 +61,7 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 ## How it Works
 
-**Impeccable:** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs.
-
-`.github/workflows/update-impeccable.yml` checks monthly for a newer version of Impeccable's skill files and opens a PR if one exists.
+**Impeccable:** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs. It runs as an installed skill, not from this template - install and update it globally in your agent harness (e.g. `npx impeccable@latest install`), and it finds this project's `PRODUCT.md` and `DESIGN.md` by convention.
 
 **Legal documents:** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible - the same files can be diffed and pulled into every site repo without touching site-specific code.
 
@@ -151,7 +149,7 @@ import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 
 The individual static commands remain available when diagnosing a failure: `npm run format:check`, `npm run astro:check` and `npm run check:dashes`. `npm run format` applies Prettier formatting.
 
-`npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md`, and never touches the vendored `.agents/`/`.claude/` Impeccable skill files.
+`npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md`.
 
 ## Project Structure
 
@@ -170,7 +168,7 @@ The individual static commands remain available when diagnosing a failure: `npm 
 
 ## Updating Site Repos from This Template
 
-Site repos are created from this one via GitHub's "Use this template", which copies the file tree once with no ongoing git relationship. `.github/workflows/update-template.yml` - itself copied into every new site repo - closes that gap: on a monthly schedule (or via `workflow_dispatch`), it pulls the paths listed in `.github/template-sync-paths.txt` from this repo and opens a PR in the site repo, the same two-job pattern (`prepare-update` builds a patch, `open-pull-request` applies it) as `update-impeccable.yml`. It no-ops when run inside this template repo itself.
+Site repos are created from this one via GitHub's "Use this template", which copies the file tree once with no ongoing git relationship. `.github/workflows/update-template.yml` - itself copied into every new site repo - closes that gap: on a monthly schedule (or via `workflow_dispatch`), it pulls the paths listed in `.github/template-sync-paths.txt` from this repo and opens a PR in the site repo. It no-ops when run inside this template repo itself.
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
