@@ -76,6 +76,38 @@ if (!publicFiles.some((file) => /^og-image\.(png|jpe?g|webp)$/i.test(file))) {
   );
 }
 
+if (
+  !existsSync(path.join(root, 'src/pages/404.astro')) &&
+  !existsSync(path.join(root, 'public/404.html'))
+) {
+  report('404 page', 'add src/pages/404.astro or public/404.html');
+}
+
+function findNoindex(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      return findNoindex(entryPath);
+    }
+    if (!entry.name.endsWith('.astro')) {
+      return [];
+    }
+    const source = readFileSync(entryPath, 'utf8');
+    return /noindex/i.test(source) ? [entryPath] : [];
+  });
+}
+
+for (const directory of ['src/pages', 'src/layouts', 'src/components']) {
+  for (const filePath of findNoindex(path.join(root, directory))) {
+    report(path.relative(root, filePath), 'remove staging noindex');
+  }
+}
+
+const robotsTxt = readFileSync(path.join(root, 'public/robots.txt'), 'utf8');
+if (/^Disallow:\s*$/m.test(robotsTxt)) {
+  report('public/robots.txt', 'remove the root Disallow before launch');
+}
+
 if (failures.length === 0) {
   console.log('Launch check passed.');
   process.exit(0);
