@@ -9,7 +9,6 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 - [How it Works](#how-it-works)
 - [Installation & Development](#installation--development)
 - [Testing](#testing)
-- [Design & Content Best Practices](#design--content-best-practices)
 - [Project Structure](#project-structure)
 - [Updating Site Repos from This Template](#updating-site-repos-from-this-template)
 - [Author & Licence](#author--licence)
@@ -50,7 +49,7 @@ Replace the placeholder theme tokens in `src/styles/global.css` (the Nova preset
 
 ### 4. Fill in the Legal Pages
 
-`src/content/legal/impressum.md` and `datenschutz.md` ship with bracketed placeholders (`[Unternehmensname]`, `[Anschrift]`, and so on). Replace every bracket with the client's real details before launch - see [Design & Content Best Practices](#design--content-best-practices).
+`src/content/legal/impressum.md` and `datenschutz.md` ship with bracketed placeholders (`[Unternehmensname]`, `[Anschrift]`, and so on). Replace every bracket with the client's real details before launch - `npm run launch:check` verifies none remain.
 
 ### 5. Run Locally
 
@@ -152,14 +151,7 @@ import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 
 The individual static commands remain available when diagnosing a failure: `npm run format:check`, `npm run astro:check` and `npm run check:dashes`. `npm run format` applies Prettier formatting.
 
-`npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md` or `docs/`, and never touches the vendored `.agents/`/`.claude/` Impeccable skill files.
-
-## Design & Content Best Practices
-
-Documentations and design and best practices are in `docs/`. The most important ones for this template are:
-
-- [docs/best-practices.md](docs/best-practices.md): design and content best practices
-- [docs/launch-checklist.md](docs/launch-checklist.md): a checklist of the things to do before a site goes live
+`npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md`, and never touches the vendored `.agents/`/`.claude/` Impeccable skill files.
 
 ## Project Structure
 
@@ -167,7 +159,6 @@ Documentations and design and best practices are in `docs/`. The most important 
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `brand/`                   | Source material for the brand, including original logos, approved photos, legal texts and other assets that define the company identity. Keep master files here, including formats that are not served by the website.                                                                                                                                                                                                                                                                                                                                |
 | `design/`                  | Design references such as page mockups, visual explorations and approved screen designs. These files guide implementation but are not part of the deployed website.                                                                                                                                                                                                                                                                                                                                                                                   |
-| `docs/`                    | Project documentation such as design decisions, technical specifications and implementation plans. Keep documentation about how or why the website works here, not runtime content or source code.                                                                                                                                                                                                                                                                                                                                                    |
 | `public/`                  | Static files served directly by the website, such as favicons, production logos and optimized photos. Copy only assets needed at runtime from `brand/` into this folder.                                                                                                                                                                                                                                                                                                                                                                              |
 | `src/`                     | The Astro website implementation, including pages, layouts, components, styles, content configuration and server-side application code.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `src/content/legal/`       | Impressum and Datenschutzerklärung content, as an Astro content collection (see [How it Works](#how-it-works)).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -183,7 +174,7 @@ Site repos are created from this one via GitHub's "Use this template", which cop
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`, `docs/launch-checklist.md`, `docs/best-practices.md`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 
