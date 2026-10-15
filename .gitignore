@@ -4,5 +4,6 @@
 /node_modules/
 /.astro/
 /dist/
+/.lighthouseci/
 /.impeccable/
 /.wrangler/

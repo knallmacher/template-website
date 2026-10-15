@@ -117,6 +117,10 @@ The browser gate covers console/page errors, WCAG 2.x A/AA accessibility violati
 npm run shot
 ```
 
+Lighthouse runs in CI as an indicator, not a gate. `.github/workflows/lighthouse.yml` builds the site, audits the pages it finds in `dist/` and reports the scores in the workflow run summary, with the HTML reports attached as a `lighthouse-reports` artifact. The configuration is `.lighthouserc.cjs`. Audit results never fail the build.
+
+By default Lighthouse audits the HTML files it discovers in `dist/` (up to five, discovery depth 2). To audit a curated set instead, add a `lighthouse.routes.json` next to `.lighthouserc.cjs` with an array of URLs, for example `["/", "/leistungen/", "/kontakt/"]`. That file is site-specific: it is not part of the template sync, so each site keeps its own routes while `.lighthouserc.cjs` itself stays updatable.
+
 Before deployment, run the client-specific readiness check:
 
 ```
@@ -172,7 +176,7 @@ Site repos are created from this one via GitHub's "Use this template", which cop
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), the Lighthouse indicator (`.lighthouserc.cjs`, `.github/workflows/lighthouse.yml`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 
