@@ -21,8 +21,8 @@ function collectRecipients(source) {
   let collecting = false;
   for (const rawLine of source.split('\n')) {
     const line = rawLine.trim();
-    // Heading form ("**Empfänger:**") followed by bullet lines.
-    if (/^\*\*Empfänger/i.test(line)) {
+    // Heading form ("**Empfänger:**" or a bare "Empfänger:") followed by bullets.
+    if (/^(?:\*\*)?Empfänger:?(?:\*\*)?$/i.test(line)) {
       collecting = true;
       continue;
     }
