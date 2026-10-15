@@ -59,11 +59,9 @@ const localBusinessJsonLd = showLocalBusiness
 <meta name="twitter:description" content={description} />
 {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-{
-  localBusinessJsonLd && (
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(localBusinessJsonLd)}
-    />
-  )
-}
+{localBusinessJsonLd && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(localBusinessJsonLd)}
+  />
+)}
