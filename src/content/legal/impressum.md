@@ -14,55 +14,62 @@ title: Impressum
 ## Kontakt
 
 E-Mail: [kontakt@domain.tld]
-Telefon: [Telefonnummer] <optional>
-Kontaktformular: [URL] <optional>
-
-## Registereintrag
-
-Registergericht: [Amtsgericht XY] <falls registerpflichtig>
-Registernummer: [HRB/HRA/VR-Nummer] <falls registerpflichtig>
+Telefon: [Telefonnummer]
 
 ## Umsatzsteuer
 
-USt-IdNr.: [Nummer] <falls vorhanden>
-Wirtschafts-Identifikationsnummer: [Nummer] <falls vorhanden>
+USt-IdNr.: [USt-IdNr.]
+Wirtschafts-Identifikationsnummer: [Wirtschafts-Identifikationsnummer]
+
+<!-- Optional: nur bei registerpflichtigen Rechtsformen (z. B. GmbH, UG, AG, OHG, KG, e. G.). Abschnitt sonst löschen. -->
+
+## Registereintrag
+
+Registergericht: [Amtsgericht]
+Registernummer: [HRB-Nummer]
+
+<!-- Optional: nur bei erlaubnispflichtigen Tätigkeiten. Abschnitt sonst löschen. -->
 
 ## Aufsichtsbehörde
 
-Zuständige Behörde: [Name], [Straße], [PLZ] [Ort] <nur bei erlaubnispflichtigen Tätigkeiten>
+Zuständige Behörde: [Name, Straße, PLZ Ort]
 
-## Berufsrechtliche Angaben <nur für reglementierte Berufe wie Rechtsanwälte, Steuerberater, Ärzte, Architekten, Ingenieure etc.>
+<!-- Optional: nur für reglementierte Berufe (z. B. Rechtsanwälte, Steuerberater, Ärzte, Architekten, Ingenieure). Abschnitt sonst löschen. -->
+
+## Berufsrechtliche Angaben
 
 Zuständige Kammer: [Name, Ort]
-Berufsbezeichnung: [Berufsbezeichnung], verliehen in: [Bundesland/Land]
-Berufsrechtliche Regelungen: [Link zur Kammer/gesetzlichen Regelungen]
-Berufshaftpflichtversicherung: [Versicherer], [Name], [Straße], [PLZ] [Ort]
+Berufsbezeichnung: [Berufsbezeichnung], verliehen in [Bundesland/Land]
+Berufsrechtliche Regelungen: [Link zu den Regelungen]
+Berufshaftpflichtversicherung: [Versicherer, Anschrift]
 Räumlicher Geltungsbereich: [Deutschland/EU/Europaweit]
+
+<!-- Optional: nur bei Verpackungs-, Elektro- oder Batterie-Rücknahmepflichten. Abschnitt sonst löschen. -->
 
 ## Spezielle Registrierungen
 
-LUCID-Nr. nach § 9 VerpackG: [Nummer] <falls betroffen>
-WEEE-Reg.-Nr. nach ElektroG: [Nummer] <falls betroffen>
-BattG-Melderegister-Nr.: [Nummer] <falls betroffen>
+LUCID-Nr. nach § 9 VerpackG: [LUCID-Nummer]
+WEEE-Reg.-Nr. nach ElektroG: [WEEE-Nummer]
+BattG-Melderegister-Nr.: [BattG-Nummer]
 
 ## Inhaltlich verantwortlich nach § 18 Abs. 2 MStV
 
 [Name]
 [Unternehmen]
-[Straße]
-[PLZ]
-[Ort]
+[Straße Hausnummer]
+[PLZ] [Ort]
 
-## Datenschutzbeauftragter <falls gesetzlich verpflichtet oder freiwillig bestellt>
+<!-- Optional: nur wenn ein Datenschutzbeauftragter benannt ist. Abschnitt sonst löschen. -->
+
+## Datenschutzbeauftragter
 
 [Name]
 [Unternehmen]
-[Straße]
-[PLZ]
-[Ort]
+[Straße Hausnummer]
+[PLZ] [Ort]
+
+<!-- Optional: nur wenn die Seite ein Streitbeilegungsangebot ausweist. Variante auswählen, Abschnitt sonst löschen. -->
 
 ## Streitbeilegung
 
-Wir nehmen an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil. Zuständig ist die Universalschlichtungsstelle des Zentrums für Schlichtung e.V., Straßburger Straße 8, 77694 Kehl am Rhein (https://www.verbraucher-schlichter.de).
-
-Wir sind [nicht bereit und nicht verpflichtet] [bereit und verpflichtet] an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. <Bei B2B-Angebot üblicherweise: nicht bereit und nicht verpflichtet.>
+Wir sind [nicht verpflichtet und nicht bereit / verpflichtet und bereit], an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
