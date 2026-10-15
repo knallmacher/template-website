@@ -2,9 +2,14 @@
 import { getEntry, render } from 'astro:content';
 import LegalLayout from '../layouts/LegalLayout.astro';
 
-const entry = await getEntry('legal', 'datenschutz');
+// The address form is a per-site choice. Set PUBLIC_ADDRESS_FORM=du in the
+// deployment build env to ship the informal variant; anything else (or unset)
+// ships the formal "Sie" variant. Both variants live side by side in
+// src/content/legal.
+const form = import.meta.env.PUBLIC_ADDRESS_FORM === 'du' ? 'du' : 'sie';
+const entry = await getEntry('legal', `datenschutz-${form}`);
 if (!entry) {
-  throw new Error('Missing legal content entry: datenschutz');
+  throw new Error(`Missing legal content entry: datenschutz-${form}`);
 }
 const { Content } = await render(entry);
 ---
