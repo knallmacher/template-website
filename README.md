@@ -16,7 +16,7 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 ## Features
 
 - **Impeccable design gate**: the [Impeccable](https://impeccable.style) skill reviews UI code for design defects (spacing, type hierarchy, contrast) while the work is being written
-- **Multi-agent wiring**: hooks and skills preconfigured for Claude Code (`.claude/`) and Codex (`.codex/`), plus a harness-agnostic skill copy (`.agents/`), so the same design gate applies regardless of which agent is doing the building
+- **Agent-agnostic gates**: the design gate (Impeccable) and the QA scripts behave the same under any agent harness - Claude Code, Codex or otherwise - because Impeccable is installed globally rather than vendored here
 - **Astro + React**: static-first site generation with React islands (`@astrojs/react`) for interactive components
 - **Tailwind + shadcn/ui**: utility CSS and theme tokens in `src/styles/global.css`, ready to rebrand per client
 - **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast - the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
@@ -61,7 +61,7 @@ Astro serves the site at `http://localhost:4321`. `npm run build` produces the s
 
 ## How it Works
 
-**Impeccable:** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs. It runs as an installed skill, not from this template - install and update it globally in your agent harness (e.g. `npx impeccable@latest install`), and it finds this project's `PRODUCT.md` and `DESIGN.md` by convention.
+**Impeccable:** [Impeccable](https://impeccable.style/) is a frontend design-quality tool: it reviews UI code for common design defects (inconsistent spacing, weak type hierarchy, poor contrast, and similar issues) the way a linter reviews code for bugs. It runs as an installed skill, not from this template - install and update it globally in your agent harness (e.g. `npx impeccable@latest install`).
 
 **Legal documents:** The Impressum and Datenschutzerklärung live in `src/content/legal/` as an Astro content collection (`src/content.config.ts`), rendered through `src/layouts/LegalLayout.astro` at `/impressum` and `/datenschutz`. Keeping them as plain Markdown content, separate from page markup, is what makes the sync workflow below possible - the same files can be diffed and pulled into every site repo without touching site-specific code.
 
@@ -127,9 +127,9 @@ Before deployment, run the client-specific readiness check:
 npm run launch:check
 ```
 
-This reports deliberate template defaults such as legal placeholders, `example.com`, missing favicon assets and a missing Open Graph image. It is expected to fail in the unconfigured template.
+This reports deliberate template defaults and launch blockers: legal-document placeholders, the `example.com` production URL, the missing favicon and web-manifest assets, a missing Open Graph image, a missing 404 page, a missing `Seo` component on public pages, leftover `noindex` markers and a root `Disallow` in `robots.txt`. It is expected to fail in the unconfigured template.
 
-Every browser script takes `[BASE_URL] [ROUTES]` as its first two arguments. `BASE_URL` defaults to `http://localhost:4321`. `ROUTES` defaults to `/impressum,/datenschutz` and accepts a comma-separated list of paths:
+Every browser script takes `[BASE_URL] [ROUTES]` as its first two arguments. `BASE_URL` defaults to `http://localhost:4321`. `ROUTES` is a comma-separated list of paths; it defaults to `/` for the individual scripts and to `/impressum,/datenschutz` for `qa.mjs`:
 
 ```
 node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
@@ -144,6 +144,7 @@ node tools/qa/qa.mjs http://localhost:4321 /,/impressum,/datenschutz
 | `contrast.mjs`      | `node tools/qa/contrast.mjs --file tools/qa/contrast-pairs.mjs`   | Checks the project-specific colour pairs in `contrast-pairs.mjs`.                                                                                           |
 | `contrast.mjs`      | `node tools/qa/contrast.mjs <fg> <bg> [large]`                    | Checks one colour pair against WCAG 2.2 AA.                                                                                                                 |
 | `shot.mjs`          | `node tools/qa/shot.mjs [BASE_URL] [ROUTES] [OUT_DIR]`            | Captures desktop, tablet and mobile screenshots, page sections, the scrolled navigation and the open mobile menu. Not part of the gate - for visual review. |
+| `no-dashes.mjs`     | `npm run check:dashes`                                            | Bans em and en dashes in content rendered on the site (`src/content/**/*.md`, `src/**/*.astro` markup).                                                     |
 
 Shared Playwright helpers (viewports, launch/teardown, animation settling) live in `tools/qa/lib/browser.mjs`. The contrast helpers can also be imported directly:
 
