@@ -9,6 +9,11 @@ if (!entry) {
 const { Content } = await render(entry);
 ---
 
-<LegalLayout title={entry.data.title}>
+<LegalLayout
+  title={entry.data.title}
+  metaTitle={entry.data.metaTitle}
+  description={entry.data.metaDescription}
+  noindex={entry.data.noindex}
+>
   <Content />
 </LegalLayout>
