@@ -6,7 +6,7 @@ title: Datenschutzerklärung
 
 ### Allgemeine Hinweise
 
-Die folgenden Hinweise geben Ihnen einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Als personenbezogene Daten gelten alle Informationen, mit deren Hilfe Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz finden Sie in unserer Datenschutzerklärung, die Sie unter diesem Text finden.
+Die folgenden Hinweise geben Ihnen einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Als personenbezogene Daten gelten alle Informationen, mit deren Hilfe Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz finden Sie in dieser Datenschutzerklärung.
 
 ### Datenerfassung auf dieser Website
 
@@ -26,27 +26,25 @@ Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website 
 
 #### Welche Rechte haben Sie bezüglich Ihrer Daten?
 
-Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem das Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Unter bestimmten Umständen haben Sie außerdem das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Darüber hinaus steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
+Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem das Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese jederzeit für die Zukunft widerrufen. Unter bestimmten Umständen haben Sie außerdem das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Darüber hinaus steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
 
 Bei weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.
 
 ## 2. Verantwortlicher
 
-[Für die in diesem Zusammenhang stattfindende Verarbeitung personenbezogener Daten ist datenschutzrechtlich verantwortlich:
+Für die in diesem Zusammenhang stattfindende Verarbeitung personenbezogener Daten ist datenschutzrechtlich verantwortlich:
 
 [Unternehmen/Firma]
-
 [Anschrift]
+E-Mail: [E-Mail]
 
-E-Mail: [E-Mail]]
+<!-- Optional: nur wenn ein Datenschutzbeauftragter benannt ist. Abschnitt sonst löschen. -->
 
-[Für Fragen im Zusammenhang mit dem Datenschutz wenden Sie sich bitte an unseren Datenschutzbeauftragten:
+Für Fragen im Zusammenhang mit dem Datenschutz erreichen Sie unseren Datenschutzbeauftragten:
 
 [Name/Firma]
-
 [Anschrift]
-
-E-Mail: [E-Mail]]
+E-Mail: [E-Mail]
 
 ## 3. Zwecke, Rechtsgrundlagen, Datenkategorien und Speicherdauern
 
@@ -58,7 +56,7 @@ Für das Webhosting setzen wir externe Dienste ein. Diese können Zugriff auf im
 
 Empfänger: Cloudflare Inc., 101 Townsend St., San Francisco, CA 94107, United States of America; im Europäischen Wirtschaftsraum (EWR) und in der Schweiz: Cloudflare Germany GmbH, Rosental 7, c/o Mindspace, 80331 München, Deutschland
 
-Datenkategorien: IP-Adresse, Datum/Uhrzeit der Anfrage, Zeitzone, Request-URL/Pfad, übertragene Datenmenge, HTTP-Statuscode, Referrer-URL, User-Agent, Fehlercodes, sicherheitsrelevante Ereignisdaten (z. B. DDoS-/Bot-Erkennung, Firewall-/WAF-Logs, Captcha-Prüfungen)
+Datenkategorien: IP-Adresse, Datum/Uhrzeit der Anfrage, Zeitzone, Request-URL/Pfad, übertragene Datenmenge, HTTP-Statuscode, Referrer-URL, User-Agent, Fehlercodes, sicherheitsrelevante Ereignisdaten (z. B. DDoS-/Bot-Erkennung, Firewall-/WAF-Logs)
 
 Zwecke: Auslieferung der Website über ein Content Delivery Network (CDN), Caching/Performance, Gewährleistung der Netz- und Informationssicherheit, Fehleranalyse, Stabilität des Betriebs
 
@@ -80,17 +78,56 @@ Rechtsgrundlagen: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Kommu
 
 Wenn Sie per Formular mit uns in Kontakt treten, verarbeiten wir Ihre personenbezogenen Daten, um Ihre Anfrage zu bearbeiten. Zur Bereitstellung der Möglichkeit zur Kontaktaufnahme setzen wir externe Dienste ein. Diese können auf die im Rahmen der Kontaktaufnahme mit uns verarbeiteten personenbezogenen Daten zugreifen.
 
-Empfänger: Webstudio Inc, 9450 SW Gemini Dr, Beaverton, OR 97008, United States of America
+Empfänger: Cloudflare Inc., 101 Townsend St., San Francisco, CA 94107, United States of America; im Europäischen Wirtschaftsraum (EWR) und in der Schweiz: Cloudflare Germany GmbH, Rosental 7, c/o Mindspace, 80331 München, Deutschland
 
 Datenkategorien: Kontakt- und Kommunikationsdaten (z. B. Name, E-Mail, Telefonnummer), Inhaltsdaten, technische Metadaten (z. B. Zeitpunkt, IP-Adresse, User-Agent)
 
 Zwecke: Bearbeitung Ihrer Anfrage, Kommunikation, Vertragsanbahnung/-durchführung
 
-Rechtsgrundlagen: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Kommunikation), Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kommunikation); für optionale Newsletter/Einwilligungsfelder Art. 6 Abs. 1 lit. a DSGVO
+Rechtsgrundlagen: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Kommunikation), Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kommunikation)
+
+<!-- ANALYSE:COOKIELESS -->
+
+### 3.4. Website- und Nutzungsanalyse
+
+Für eine cookielose Website- und Nutzungsanalyse setzen wir PostHog (PostHog EU Cloud) ein. Dabei werden keine Cookies gesetzt und keine dauerhaften Kennungen gespeichert.
+
+Empfänger: PostHog, Inc., 2261 Market St. #4008, San Francisco, CA 94114, United States of America (PostHog EU Cloud)
+
+Datenkategorien: IP-Adresse, User-Agent, Datum/Uhrzeit der Anfrage, aufgerufene URL/Pfad, Referrer-URL, Gerätetyp und Browserinformationen, Seitenaufrufe und Interaktionsereignisse, pseudonymisierte Nutzungskennungen (temporäre Hash-Werte)
+
+Zwecke: Analyse von Seitenaufrufen und Nutzerinteraktionen, Ermittlung von Besucherzahlen, Auswertung der Website-Nutzung, Verbesserung von Benutzerfreundlichkeit und Website-Performance ohne dauerhafte Wiedererkennung einzelner Besucher
+
+Rechtsgrundlagen: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Analyse und Verbesserung der Website)
 
 ## 4. Cookies
 
-Wir setzen keine einwilligungsbedürftigen Cookies oder vergleichbaren Technologien ein. Technisch erforderliche Sicherheits- und Betriebsmaßnahmen können gemäß § 25 Abs. 2 Nr. 2 TTDSG jedoch Endgeräteinformationen verarbeiten. Soweit dabei personenbezogene Daten verarbeitet werden, stützen wir dies auf Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität, Sicherheit und effizienter Auslieferung).
+Wir setzen keine einwilligungsbedürftigen Cookies oder vergleichbaren Technologien ein. Technisch erforderliche Sicherheits- und Betriebsmaßnahmen können gemäß § 25 Abs. 2 TDDDG jedoch Endgeräteinformationen verarbeiten. Soweit dabei personenbezogene Daten verarbeitet werden, stützen wir dies auf Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität, Sicherheit und effizienter Auslieferung).
+
+<!-- /ANALYSE:COOKIELESS -->
+
+<!-- ANALYSE:COOKIES -->
+
+### 3.4. Website- und Nutzungsanalyse
+
+Zur Analyse des Nutzerverhaltens über mehrere Sitzungen setzen wir PostHog (PostHog EU Cloud) und Google Analytics 4 (GA4) ein. Beide Dienste werden ausschließlich nach Ihrer Einwilligung geladen, die Sie über den Consent-Banner erteilen und jederzeit widerrufen können.
+
+Empfänger:
+
+- PostHog, Inc., 2261 Market St. #4008, San Francisco, CA 94114, United States of America (PostHog EU Cloud)
+- Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland
+
+Datenkategorien: IP-Adresse, User-Agent, Datum/Uhrzeit der Anfrage, aufgerufene URL/Pfad, Referrer-URL, Gerätetyp und Browserinformationen, Seitenaufrufe und Interaktionsereignisse, Cookie-Kennungen, pseudonyme Nutzer- und Sitzungs-IDs, wiederkehrende Besuche, Navigationspfade, Conversion-Ereignisse
+
+Zwecke: Analyse des Nutzerverhaltens über mehrere Sitzungen, Erkennung wiederkehrender Besucher, Auswertung von Navigationspfaden und Conversion-Ereignissen, Optimierung von Benutzerfreundlichkeit, Website-Performance und Marketingmaßnahmen
+
+Rechtsgrundlagen: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung), § 25 Abs. 1 TDDDG (Einwilligung für das Speichern und Auslesen von Informationen auf Ihrem Endgerät)
+
+## 4. Cookies
+
+Wir setzen Cookies und vergleichbare Technologien ein, um das Nutzerverhalten über mehrere Sitzungen auszuwerten. Einwilligungsbedürftige Cookies werden erst nach Ihrer ausdrücklichen Einwilligung gesetzt, die Sie über den Consent-Banner erteilen. Ihre Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen und Ihre Auswahl im Banner ändern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Technisch erforderliche Sicherheits- und Betriebsmaßnahmen können gemäß § 25 Abs. 2 TDDDG Endgeräteinformationen verarbeiten; soweit dabei personenbezogene Daten verarbeitet werden, stützen wir dies auf Art. 6 Abs. 1 lit. f DSGVO.
+
+<!-- /ANALYSE:COOKIES -->
 
 ## 5. Weitere externe Inhalte
 
@@ -100,7 +137,7 @@ Grundsätzlich hosten wir Medien und Schriften lokal. Externe Einbindungen erfol
 
 Wir setzen sorgfältig ausgewählte Dienstleister als Auftragsverarbeiter gemäß Art. 28 DSGVO ein. Eine stets aktuelle und detaillierte Liste unserer Dienstleister finden Sie unter:
 
-[Liste der Subunternehmer](https://knallmacher.de/legal/subunternehmer)
+[Liste der Dienstleister]
 
 ## 7. Datenübermittlungen in Drittländer
 
@@ -112,7 +149,7 @@ Wenn die Europäische Kommission in einem Angemessenheitsbeschluss festgestellt 
 
 Eine Liste der angemessenen Drittländer finden Sie unter:
 
-[Angemessenheitsbeschlüsse der Europäische Kommission](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en)
+[Angemessenheitsbeschlüsse der Europäischen Kommission](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en)
 
 ## 8. Speicherdauern und Löschung
 
@@ -168,7 +205,9 @@ Grundsätzlich besteht keine gesetzliche Pflicht zur Bereitstellung Ihrer Daten.
 
 ## 11. Informationssicherheit
 
-Wir setzen umfangreiche technische und organisatorische Sicherheitsmaßnahmen gemäß Art. 32 DSGVO ein, um Ihre persönlichen Daten vor vorsätzlichen Manipulationen, Verlust oder dem Zugriff durch unautorisierte Dritte zu schützen. Diese Maßnahmen werden im Rahmen der geltenden Datenschutzgesetze und entsprechend der technologischen Entwicklungen ständig verbessert. Dennoch möchten wir Sie darauf hinweisen, dass Informationen, die Sie freiwillig im Netz freigeben, von anderen genutzt werden können. Trotz aller technischen und organisatorischen Sicherheitsmaßnahmen kann ein vollständiger Schutz vor unberechtigtem Zugriff durch Dritte bei der Datenübertragung im Internet nicht garantiert werden.
+Wir setzen umfangreiche technische und organisatorische Sicherheitsmaßnahmen gemäß Art. 32 DSGVO ein, um Ihre personenbezogenen Daten vor vorsätzlichen Manipulationen, Verlust oder dem Zugriff durch unautorisierte Dritte zu schützen. Diese Maßnahmen werden im Rahmen der geltenden Datenschutzgesetze und entsprechend der technologischen Entwicklungen ständig verbessert. Dennoch möchten wir Sie darauf hinweisen, dass Informationen, die Sie freiwillig im Netz freigeben, von anderen genutzt werden können. Trotz aller technischen und organisatorischen Sicherheitsmaßnahmen kann ein vollständiger Schutz vor unberechtigtem Zugriff durch Dritte bei der Datenübertragung im Internet nicht garantiert werden.
+
+<!-- Optional: nur wenn die Website auf Social-Media-Profile verweist. Abschnitt sonst löschen. -->
 
 ## 12. Social-Media
 
@@ -200,44 +239,40 @@ Bitte beachten Sie, dass wir trotz der gemeinsamen Verantwortlichkeit mit den Be
 
 Betreiber des Netzwerks ist: Meta Platforms Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Ireland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von Facebook](https://www.facebook.com/privacy/policy)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von Facebook](https://www.facebook.com/privacy/policy)
 
 #### Instagram
 
 Betreiber des Netzwerks ist: Meta Platforms Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Ireland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von Instagram](https://privacycenter.instagram.com/policy)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von Instagram](https://privacycenter.instagram.com/policy)
 
 #### TikTok
 
 Betreiber des Netzwerks ist: TikTok Technology Limited, The Sorting Office, Ropemaker Place, Dublin 2, Ireland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von TikTok](https://www.tiktok.com/legal/page/eea/privacy-policy/de)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von TikTok](https://www.tiktok.com/legal/page/eea/privacy-policy/de)
 
 #### YouTube
 
 Betreiber des Netzwerks ist: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von YouTube](https://policies.google.com/privacy?hl=de)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von YouTube](https://policies.google.com/privacy?hl=de)
 
 #### LinkedIn
 
 Betreiber des Netzwerks ist: LinkedIn Ireland Unlimited Company, Wilton Place, Dublin 2, Ireland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von LinkedIn](https://de.linkedin.com/legal/privacy-policy)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von LinkedIn](https://de.linkedin.com/legal/privacy-policy)
 
 #### XING
 
 Betreiber des Netzwerks ist: New Work SE, Am Strandkai 1, 20457 Hamburg, Deutschland
 
-Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter:
-[Datenschutzerklärung von XING](https://privacy.xing.com/de/datenschutzerklaerung)
+Informationen zu der Datenschutzerklärung des Netzwerks finden Sie unter: [Datenschutzerklärung von XING](https://privacy.xing.com/de/datenschutzerklaerung)
 
-## 13. Änderungen dieser Datenschutzerklärung
+## Änderungen dieser Datenschutzerklärung
 
-Wir passen diese Datenschutzerklärung an, sobald Änderungen in unserer Datenverarbeitung oder der Rechtslage dies erforderlich machen. Die letzte Änderung dieser Datenschutzerklärung erfolgte am 01.09.2025.
+Wir passen diese Datenschutzerklärung an, sobald Änderungen in unserer Datenverarbeitung oder der Rechtslage dies erforderlich machen.
+
+Stand: [Datum]
