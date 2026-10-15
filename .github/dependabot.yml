@@ -10,6 +10,12 @@ updates:
     commit-message:
       prefix: 'deps'
     versioning-strategy: 'increase-if-necessary'
+    # TypeScript major bumps are held back: the current @astrojs/check rejects
+    # TypeScript 7 as a peer (it allows ^5 || ^6), so a grouped bump that
+    # includes it fails npm ci. Remove this once @astrojs/check supports it.
+    ignore:
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
     groups:
       node-tooling:
         patterns:
