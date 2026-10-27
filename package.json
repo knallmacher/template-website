@@ -17,9 +17,7 @@
     "launch:check": "node tools/check/launch.mjs",
     "qa": "node tools/qa/qa.mjs",
     "shot": "node tools/qa/shot.mjs",
-    "check:dashes": "node tools/qa/no-dashes.mjs",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "check:dashes": "node tools/qa/no-dashes.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",
@@ -43,9 +41,6 @@
     "@types/react-dom": "^19.2.3",
     "axe-core": "^4.12.1",
     "playwright": "^1.61.1",
-    "prettier": "^3.9.5",
-    "prettier-plugin-astro": "^1.1.1",
-    "prettier-plugin-tailwindcss": "^0.8.0",
     "shadcn": "^4.13.0",
     "typescript": "^6.0.3"
   }
