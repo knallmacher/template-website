@@ -22,7 +22,6 @@ Astro starter template [knallmacher](https://knallmacher.de) uses to build clien
 - **Visual QA suite**: Playwright + axe-core scripts covering console errors, accessibility, narrow-viewport overflow, and colour contrast - the automated checks a human reviewer would otherwise have to run by hand on agent-produced UI
 - **German legal document templates**: Impressum and Datenschutzerklärung as an Astro content collection, ready to fill in per client
 - **SEO component**: `src/components/Seo.astro` handles meta tags, Open Graph/Twitter cards and `LocalBusiness` JSON-LD, plus `@astrojs/sitemap` and a starter `robots.txt` - drop it into any page's `<head>` without inheriting layout decisions
-- **Prettier formatting**: `prettier-plugin-astro` and `prettier-plugin-tailwindcss` keep formatting and Tailwind class order identical regardless of which agent or session wrote the code
 - **Template sync workflow**: propagates shared updates (legal text, tooling, config) from this repo into site repos created from it
 
 ## Quick Start
@@ -104,7 +103,7 @@ The pull-request gate is intentionally limited to static validation and the prod
 npm run verify
 ```
 
-`npm run verify` runs formatting, Astro and TypeScript validation, the rendered-content dash check and `astro build`. GitHub Actions runs the same command for every pull request. It does not run on direct pushes and does not start a browser.
+`npm run verify` runs Astro and TypeScript validation, the rendered-content dash check and `astro build`. GitHub Actions runs the same command for every pull request. It does not run on direct pushes and does not start a browser.
 
 Browser QA is local-only. Start the dev server in one terminal, then run the checks in another:
 
@@ -154,7 +153,7 @@ Shared Playwright helpers (viewports, launch/teardown, animation settling) live 
 import { ratio, check, checkPairs } from './tools/qa/contrast.mjs';
 ```
 
-The individual static commands remain available when diagnosing a failure: `npm run format:check`, `npm run astro:check` and `npm run check:dashes`. `npm run format` applies Prettier formatting.
+The individual static commands remain available when diagnosing a failure: `npm run astro:check` and `npm run check:dashes`.
 
 `npm run check:dashes` bans em dashes (`—`) and en dashes (`–`) from content that ends up readable on the site - `src/content/**/*.md` in full, and `src/**/*.astro` template markup (frontmatter is stripped first, since it's code, not rendered output). It does not scan `README.md`.
 
@@ -181,7 +180,7 @@ Site repos are created from this one via GitHub's "Use this template", which cop
 
 This repo is public specifically so that checkout works anonymously - no credential needs to be provisioned or rotated in every site repo. Nothing in here is confidential: the legal documents are bracketed placeholders, and the tooling is generic scaffolding.
 
-This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), the Lighthouse indicator (`.lighthouserc.cjs`, `.github/workflows/lighthouse.yml`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `prettier.config.mjs`, `.prettierignore`, `.github/dependabot.yml`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
+This currently covers the legal document content and layout (`src/content/legal/`, `src/content.config.ts`, `src/layouts/LegalLayout.astro`, `src/pages/impressum.astro`, `src/pages/datenschutz.astro`), the SEO component (`src/components/Seo.astro`), the Lighthouse indicator (`.lighthouserc.cjs`, `.github/workflows/lighthouse.yml`), and shared tooling (`tools/check/`, `tools/qa/`, `tsconfig.json`, `.github/dependabot.yml`). Add a path to `.github/template-sync-paths.txt` when something else in the template should propagate the same way - anything not listed is treated as site-specific and left alone.
 
 Because this pulls in legal text, the resulting PR always needs a human review before merging, not an auto-merge.
 
